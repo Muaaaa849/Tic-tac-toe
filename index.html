@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#07080a">
+  <meta name="color-scheme" content="dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="STRATA">
+  <meta name="format-detection" content="telephone=no">
+  <title>STRATA — 重ねて、隠して、4つ並べ。</title>
+  <meta name="description" content="1台のスマホを挟んで2人で遊ぶ、記憶の立体四目並べ。赤・緑・青のコマを積み上げ、同じ色を4つ並べたら勝ち。真上からは一番上の色しか見えない。">
+  <meta property="og:title" content="STRATA — 重ねて、隠して、4つ並べ。">
+  <meta property="og:description" content="1台のスマホを挟んで2人で遊ぶ、記憶の立体四目並べ。">
+  <meta property="og:image" content="icons/og.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.js",
+        "three/addons/": "./vendor/three/addons/"
+      }
+    }
+  </script>
+  <link rel="modulepreload" href="vendor/three/three.core.js">
+  <link rel="modulepreload" href="vendor/three/three.module.js">
+  <link rel="modulepreload" href="src/main.js">
+</head>
+<body>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <canvas id="labels" aria-hidden="true"></canvas>
+
+  <div id="app" data-screen="loading" data-style="face">
+    <!-- seat docks: "far" is the player across the table, "near" is closest to the home indicator -->
+    <section class="dock" data-seat="far" id="dock-far" aria-label="プレイヤー2"></section>
+    <div id="board-area" aria-label="盤面"></div>
+    <section class="dock" data-seat="near" id="dock-near" aria-label="プレイヤー1"></section>
+
+    <!-- loading -->
+    <div class="screen" id="loading">
+      <div class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="loading-text">STRATA</p>
+    </div>
+
+    <!-- title -->
+    <div class="screen" id="title">
+      <div class="title-block">
+        <div class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+        <h1 class="logo">STRATA</h1>
+        <p class="tagline">重ねて、隠して、4つ並べ。</p>
+      </div>
+      <div class="title-actions">
+        <button class="btn primary" id="btn-continue" hidden>
+          <span>続きから</span><small id="continue-meta"></small>
+        </button>
+        <button class="btn primary" id="btn-new"><span>あそぶ</span></button>
+        <div class="btn-row">
+          <button class="btn quiet" id="btn-howto">遊び方</button>
+          <button class="btn quiet" id="btn-settings">設定</button>
+        </div>
+      </div>
+      <p class="install-hint" id="install-hint" hidden>
+        <span>共有ボタン</span> →「ホーム画面に追加」で全画面になります
+        <button class="x" aria-label="閉じる">×</button>
+      </p>
+    </div>
+
+    <!-- result -->
+    <div class="screen" id="result" aria-live="polite">
+      <div class="result-card seat-anchored" data-seat="far"></div>
+      <div class="result-card seat-anchored" data-seat="near"></div>
+    </div>
+    <div class="peek-bar" id="peek-bar">
+      <button class="btn pill seat-anchored" data-seat="far">結果に戻る</button>
+      <button class="btn pill seat-anchored" data-seat="near">結果に戻る</button>
+    </div>
+
+    <!-- modal sheets -->
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden>
+      <div class="sheet-scrim" data-close></div>
+      <div class="sheet-panel" role="document"></div>
+    </div>
+
+    <div class="curtain" id="curtain"></div>
+  </div>
+
+  <noscript><p style="color:#fff;padding:2em">JavaScriptを有効にしてください。</p></noscript>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
