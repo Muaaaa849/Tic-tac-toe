@@ -173,7 +173,7 @@ function showTitle(first = false) {
   cont.hidden = !saved;
   if (saved) {
     const n = saved.game.moves.length;
-    $('#continue-meta').textContent = `${saved.game.size}×${saved.game.size} · ${n}手目`;
+    $('#continue-meta').textContent = `${saved.game.size}×${saved.game.size} · ${n + 1}手目`;
   }
   $('#btn-new span').textContent = saved ? '新しいゲーム' : 'あそぶ';
   $('#btn-new').classList.toggle('primary', !saved);
@@ -908,7 +908,7 @@ function openMenu(seat) {
   openSheet(`
     <button class="sheet-close" data-close aria-label="閉じる">×</button>
     <h2>メニュー</h2>
-    <p class="lead">${state.game.size}×${state.game.size} · 高さ${state.game.height} · ${state.game.moves.length}手目</p>
+    <p class="lead">${state.game.size}×${state.game.size} · 高さ${state.game.height} · ${state.game.moves.length + 1}手目</p>
     <div class="menu-list">
       <button class="btn primary" data-close>ゲームに戻る</button>
       <button class="btn quiet" data-a="howto">遊び方</button>

@@ -172,7 +172,7 @@ function makeStudioEnvironment() {
     m.lookAt(0, 0, 0);
     s.add(m);
   };
-  panel(26, 16, 7.5, [-24, 22, -12], 0xfff3e2);   // key softbox (matches the sun direction)
+  panel(26, 16, 6.0, [-24, 22, -12], 0xfff3e2);   // key softbox (matches the sun direction)
   panel(34, 5, 3.2, [24, 13, 16], 0xdfe8ff);      // cool strip on the opposite side
   panel(18, 10, 2.0, [8, 18, -26], 0xffffff);     // kicker
   panel(30, 6, 1.4, [-6, 6, 30], 0xffe6c8);       // warm low bounce
@@ -333,10 +333,11 @@ export class BoardScene {
       envMapIntensity: 1.15,
     });
     const gemOf = (i) => new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(GEM_HEX[i]), metalness: 0, roughness: 0.16,
-      clearcoat: 1, clearcoatRoughness: 0.03, ior: 1.76, specularIntensity: 1,
+      // restrained reflections: the color must stay readable at any angle
+      color: new THREE.Color(GEM_HEX[i]), metalness: 0, roughness: 0.2,
+      clearcoat: 0.5, clearcoatRoughness: 0.06, ior: 1.5, specularIntensity: 0.6,
       emissive: new THREE.Color(GEM_HEX[i]), emissiveMap: this.gemGlow, emissiveIntensity: 0.32,
-      envMapIntensity: 1.2,
+      envMapIntensity: 0.8,
     });
     this.bodyMats = [0, 1, 2].map(bodyOf);
     this.gemMats = [0, 1, 2].map(gemOf);
