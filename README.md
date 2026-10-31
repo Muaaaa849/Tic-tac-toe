@@ -59,10 +59,11 @@ tests/game.test.mjs   ルールのテスト
 
 ## 公開（GitHub Pages）
 
-1. このブランチを `main` にマージ（またはこのブランチをそのまま使う）
-2. リポジトリの **Settings → Pages → Build and deployment** で
-   **Source: Deploy from a branch**、ブランチと **/ (root)** を選んで保存
-3. 数分後に `https://muaaaa849.github.io/Tic-tac-toe/` で遊べます
+`.github/workflows/pages.yml` が push のたびにテストを実行し、Pages へデプロイします。
+
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions**
+2. `main`（またはこのブランチ）に push すると自動で公開。Actions タブから手動実行も可能
+3. `https://muaaaa849.github.io/Tic-tac-toe/`
 
 ## 開発
 
